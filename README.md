@@ -103,18 +103,30 @@ Our BDHNet achieves SOTA performance on **GoPro**, **REBlur**, and **MS-RBD** da
 
 ## 🔬 Ablation Studies
 
-We validate the effectiveness of the NCM and RBAM modules. The NCM significantly improves training convergence by dynamically setting neuron thresholds.
+[cite_start]We conduct comprehensive ablation studies to validate the effectiveness of the proposed modules [cite: 320-321].
 
 <details>
-<summary><b>📉 Click to view Ablation Visualizations</b></summary>
+<summary><b>📉 Visualizations: RBAM & Loss Analysis (Click to Expand)</b></summary>
 <br>
+
+### 1. Effectiveness of RBAM
 <p align="center">
-  <img src="Figure/Abla_RBAM.jpg" alt="Ablation RBAM" width="45%">
-  <img src="Figure/Abla_loss_compare.jpg" alt="Ablation Loss" width="45%">
+  <img src="Figure/Abla_RBAM.jpg" alt="Ablation RBAM" width="70%">
 </p>
 <p align="center">
-  <b>Left:</b> Effectiveness of Region-Based Attention Module (RBAM). <b>Right:</b> Training loss comparison showing faster convergence with NCM initialization.
+  [cite_start]<b>Figure 7: Effectiveness of the Region of Blurry Attention Module (RBAM).</b> The RBAM generates a mask that specifically targets blurry regions, improving feature fusion accuracy [cite: 345-348].
 </p>
+
+<br>
+
+### 2. Training Convergence (NCM)
+<p align="center">
+  <img src="Figure/Abla_loss_compare.jpg" alt="Ablation Loss" width="60%">
+</p>
+<p align="center">
+  [cite_start]<b>Figure 8: Training loss comparison.</b> The NCM initialization (Green line) leads to faster convergence and lower training loss compared to methods without initialization (Grey line) [cite: 335-339].
+</p>
+
 </details>
 
 ---

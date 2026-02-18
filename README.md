@@ -8,7 +8,7 @@ This is the official implementation of **ClearSight: Human Vision-Inspired Solut
 **Authors**: Xiaopeng Lin, Yulong Huang, Hongwei Ren, Zunchang Liu, Hongxiang Huang, Yue Zhou, Haotian Fu, Bojun Cheng
 **Affiliation**: The Hong Kong University of Science and Technology (Guangzhou)
 
-📄 **Paper**: [Link to be added]
+📄 **Paper**: [https://openaccess.thecvf.com/content/ICCV2025/html/Lin_ClearSight_Human_Vision-Inspired_Solutions_for_Event-Based_Motion_Deblurring_ICCV_2025_paper.html]
 
 ## 🔥 News
 - **[2025]** Code and pretrained models are released!
@@ -32,7 +32,7 @@ Extensive evaluations demonstrate that our method outperforms current state-of-t
 Our approach mimics the human visual system, processing visual stimuli hierarchically as color (via ANN) and motion (via SNN).
 
 <p align="center">
-  <img src="Figure/Fig1_Framework.jpg" alt="Framework" width="90%">
+  <img src="Figure/Fig0_Motivation.jpg" alt="Framework" width="90%">
 </p>
 <p align="center">
   <b>Figure 1: The working mechanism of the human visual system and the proposed Bioinspired Dual-Drive Hybrid Network (BDHNet).</b>
@@ -44,7 +44,7 @@ Our approach mimics the human visual system, processing visual stimuli hierarchi
 The framework adopts an encoder-decoder architecture. The **NCM** performs visual enhancement from image to event (Neuron-based Attention), while the **RBAM** performs visual enhancement from event to image (Synapse-based Attention).
 
 <p align="center">
-  <img src="Figure/Fig2_Architecture.jpg" alt="Architecture" width="95%">
+  <img src="Figure/Fig1_Framework.jpg" alt="Architecture" width="95%">
 </p>
 <p align="center">
   <b>Figure 2: The overall framework of BDHNet.</b> The event stream is processed into a voxel-based representation. NCM dynamically configures SNN neurons, and RBAM generates a mask for blurry regions to guide fusion.

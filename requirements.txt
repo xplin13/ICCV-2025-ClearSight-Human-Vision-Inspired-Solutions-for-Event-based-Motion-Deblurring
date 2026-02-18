@@ -1,0 +1,15 @@
+# Core dependencies
+torch>=1.10.0
+torchvision>=0.11.0
+numpy>=1.19.0
+opencv-python>=4.5.0
+
+# Spiking neural network
+spikingjelly>=0.0.0
+
+# Image processing and metrics
+basicsr>=1.4.0
+einops>=0.3.0
+
+# Training utilities
+tensorboard>=2.8.0

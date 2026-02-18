@@ -3,7 +3,10 @@
 [![ICCV 2025](https://img.shields.io/badge/ICCV-2025-blue.svg)](https://openaccess.thecvf.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-This is the official implementation of **ClearSight: Human Vision-Inspired Solutions for Event-based Motion Deblurring**, accepted by ICCV 2025.
+This is the official implementation of **ClearSight: Human Vision-Inspired Solutions for Event-based Motion Deblurring**, accepted by **ICCV 2025**.
+
+**Authors**: Xiaopeng Lin, Yulong Huang, Hongwei Ren, Zunchang Liu, Hongxiang Huang, Yue Zhou, Haotian Fu, Bojun Cheng
+**Affiliation**: The Hong Kong University of Science and Technology (Guangzhou)
 
 📄 **Paper**: [Link to be added]
 
@@ -14,93 +17,105 @@ This is the official implementation of **ClearSight: Human Vision-Inspired Solut
 
 ## 📖 Abstract
 
-Event-based cameras have emerged as promising sensors for motion deblurring due to their high temporal resolution and low latency. However, effectively fusing event information with blurry images remains a challenging problem. In this paper, we propose **ClearSight**, a human vision-inspired framework for event-based motion deblurring. Our approach mimics the biological visual system's mechanism to achieve high-quality deblurring results.
+Motion deblurring addresses the challenge of image blur caused by camera or scene movement. Event cameras provide motion information encoded in asynchronous event streams. To efficiently leverage the temporal information of event streams, we employ Spiking Neural Networks (SNNs) for motion feature extraction and Artificial Neural Networks (ANNs) for color information processing.
+
+Inspired by the visual attention mechanism in the human visual system, this study introduces a **Bioinspired Dual-Drive Hybrid Network (BDHNet)**. Specifically:
+* The **Neuron Configurator Module (NCM)** is designed to dynamically adjust neuron configurations based on cross-modal features, focusing spikes in blurry regions.
+* The **Region of Blurry Attention Module (RBAM)** is introduced to generate a blurry mask in an unsupervised manner, effectively extracting motion clues and guiding accurate cross-modal feature fusion.
+
+Extensive evaluations demonstrate that our method outperforms current state-of-the-art methods on synthetic and real-world datasets.
 
 ---
 
-## 🏗️ Framework
+## 🏗️ Method: BDHNet
+
+Our approach mimics the human visual system, processing visual stimuli hierarchically as color (via ANN) and motion (via SNN).
 
 <p align="center">
   <img src="Figure/Fig1_Framework.jpg" alt="Framework" width="90%">
 </p>
 <p align="center">
-  <b>Figure 1: Architecture of ClearSight.</b> The framework consists of event-driven spike processing modules and cross-attention fusion mechanisms.
+  <b>Figure 1: The working mechanism of the human visual system and the proposed Bioinspired Dual-Drive Hybrid Network (BDHNet).</b>
 </p>
 
----
 
-## 💡 Motivation
+### Network Architecture
+
+The framework adopts an encoder-decoder architecture. The **NCM** performs visual enhancement from image to event (Neuron-based Attention), while the **RBAM** performs visual enhancement from event to image (Synapse-based Attention).
 
 <p align="center">
-  <img src="Figure/Fig0_Motivation.jpg" alt="Motivation" width="80%">
+  <img src="Figure/Fig2_Architecture.jpg" alt="Architecture" width="95%">
 </p>
 <p align="center">
-  <b>Figure 0: Motivation.</b> Comparison between traditional deblurring methods and our event-based approach.
+  <b>Figure 2: The overall framework of BDHNet.</b> The event stream is processed into a voxel-based representation. NCM dynamically configures SNN neurons, and RBAM generates a mask for blurry regions to guide fusion.
 </p>
 
 ---
 
 ## 📊 Results
 
-### Quantitative Results
+Our BDHNet achieves SOTA performance on **GoPro**, **REBlur**, and **MS-RBD** datasets.
 
+### Quantitative Comparison
 <p align="center">
-  <img src="Figure/table1.png" alt="Main Results" width="80%">
+  <img src="Figure/table1.png" alt="Main Results" width="85%">
 </p>
 <p align="center">
-  <b>Table 1: Quantitative comparison on benchmark datasets.</b> Our method achieves state-of-the-art performance on GOPRO, REBlur, and MS-RBD datasets.
-</p>
-
-### Qualitative Results
-
-#### GOPRO Dataset
-<p align="center">
-  <img src="Figure/gopro.jpg" alt="GOPRO Results" width="80%">
-</p>
-<p align="center">
-  <b>Visual results on GOPRO dataset.</b>
+  <b>Table 1: Performance comparison on GoPro and REBlur datasets.</b> Our method achieves the highest PSNR/SSIM, showing superior ability to mitigate blur effects.
 </p>
 
-#### REBlur Dataset
-<p align="center">
-  <img src="Figure/REBlur.jpg" alt="REBlur Results" width="80%">
-</p>
-<p align="center">
-  <b>Visual results on REBlur dataset.</b>
-</p>
+### Qualitative Comparison (Click to Expand)
 
-#### MS-RBD Dataset
+<details>
+<summary><b>🖼️ GoPro Dataset Results (Synthetic)</b></summary>
+<br>
 <p align="center">
-  <img src="Figure/MS.jpg" alt="MS-RBD Results" width="80%">
+  <img src="Figure/gopro.jpg" alt="GOPRO Results" width="100%">
 </p>
 <p align="center">
-  <b>Visual results on MS-RBD dataset.</b>
+  <b>Figure 3: Qualitative comparisons on GoPro dataset.</b> Our method excels in restoring sharper text and finer structural details compared to EFNet, MotionSNN, and others.
 </p>
+</details>
+
+<details>
+<summary><b>🖼️ REBlur Dataset Results (Real-World)</b></summary>
+<br>
+<p align="center">
+  <img src="Figure/REBlur.jpg" alt="REBlur Results" width="100%">
+</p>
+<p align="center">
+  <b>Figure 4: Qualitative comparisons on REBlur dataset.</b> Even without fine-tuning, our model demonstrates robust generalization in real-world blurry scenarios.
+</p>
+</details>
+
+<details>
+<summary><b>🖼️ MS-RBD Dataset Results & Mask Visualization</b></summary>
+<br>
+<p align="center">
+  <img src="Figure/MS.jpg" alt="MS-RBD Results" width="100%">
+</p>
+<p align="center">
+  <b>Figure 5: Visual results on MS-RBD dataset.</b> The visualization shows the unsupervised blurry mask generation, effectively delineating blurry regions.
+</p>
+</details>
 
 ---
 
 ## 🔬 Ablation Studies
 
-<p align="center">
-  <img src="Figure/Abla_RBAM.jpg" alt="Ablation RBAM" width="70%">
-</p>
-<p align="center">
-  <b>Ablation study on Region-Based Attention Module (RBAM).</b>
-</p>
+We validate the effectiveness of the NCM and RBAM modules. The NCM significantly improves training convergence by dynamically setting neuron thresholds.
 
+<details>
+<summary><b>📉 Click to view Ablation Visualizations</b></summary>
+<br>
 <p align="center">
-  <img src="Figure/Abla_loss_compare.jpg" alt="Ablation Loss" width="70%">
+  <img src="Figure/Abla_RBAM.jpg" alt="Ablation RBAM" width="45%">
+  <img src="Figure/Abla_loss_compare.jpg" alt="Ablation Loss" width="45%">
 </p>
 <p align="center">
-  <b>Ablation study on different loss functions.</b>
+  <b>Left:</b> Effectiveness of Region-Based Attention Module (RBAM). <b>Right:</b> Training loss comparison showing faster convergence with NCM initialization.
 </p>
-
-<p align="center">
-  <img src="Figure/Abla_vis.jpg" alt="Ablation Visualization" width="70%">
-</p>
-<p align="center">
-  <b>Visualization of ablation study results.</b>
-</p>
+</details>
 
 ---
 
@@ -109,21 +124,17 @@ Event-based cameras have emerged as promising sensors for motion deblurring due 
 ### Prerequisites
 
 - Python 3.8+
-- CUDA 11.0+
 - PyTorch 1.10+
+- CUDA 11.0+
 
 ### Installation
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/ClearSight.git
+git clone [https://github.com/your-username/ClearSight.git](https://github.com/your-username/ClearSight.git)
 cd ClearSight
-```
-
-2. Install dependencies:
-```bash
 pip install -r requirements.txt
 ```
+
 
 ### Dataset Preparation
 
@@ -186,10 +197,11 @@ See [requirements.txt](requirements.txt) for the list of dependencies.
 If you find this work helpful for your research, please consider citing our paper:
 
 ```bibtex
-@inproceedings{clearsight2025,
-  title={ClearSight: Human Vision-Inspired Solutions for Event-based Motion Deblurring},
-  author={Anonymous},
-  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+@inproceedings{lin2025clearsight,
+  title={ClearSight: Human vision-inspired solutions for event-based motion deblurring},
+  author={Lin, Xiaopeng and Huang, Yulong and Ren, Hongwei and Liu, Zunchang and Huang, Hongxiang and Zhou, Yue and Fu, Haotian and Cheng, Bojun},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={7462--7471},
   year={2025}
 }
 ```

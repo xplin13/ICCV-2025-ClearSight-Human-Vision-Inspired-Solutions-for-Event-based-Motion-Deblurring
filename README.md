@@ -89,13 +89,13 @@ Our BDHNet achieves SOTA performance on **GoPro**, **REBlur**, and **MS-RBD** da
 </details>
 
 <details>
-<summary><b>🖼️ MS-RBD Dataset Results & Mask Visualization</b></summary>
+<summary><b>🖼️ MS-RBD Dataset Results(Real-World)</b></summary>
 <br>
 <p align="center">
   <img src="Figure/MS.jpg" alt="MS-RBD Results" width="100%">
 </p>
 <p align="center">
-  <b>Figure 5: Visual results on MS-RBD dataset.</b> The visualization shows the unsupervised blurry mask generation, effectively delineating blurry regions.
+  <b>Figure 5: Visual results on real-world MS-RBD dataset.
 </p>
 </details>
 

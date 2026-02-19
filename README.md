@@ -192,7 +192,7 @@ ClearSight/
 │   ├── Model_gpu.py            # Main model architecture
 │   ├── layers_gpu.py           # Basic layer definitions
 │   ├── Attention_fusion.py     # Attention fusion modules
-│   └── neuron_gpu.py           # Custom spiking neuron
+│   └── neuron_gpu.py           # Custom ILIF neuron
 └── Figure/                     # Paper figures
 ```
 

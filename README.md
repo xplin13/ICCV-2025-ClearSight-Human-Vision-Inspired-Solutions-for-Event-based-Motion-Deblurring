@@ -1,7 +1,7 @@
 # ClearSight: Human Vision-Inspired Solutions for Event-based Motion Deblurring
 
 [![ICCV 2025](https://img.shields.io/badge/ICCV-2025-blue.svg)](https://openaccess.thecvf.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This is the official implementation of **ClearSight: Human Vision-Inspired Solutions for Event-based Motion Deblurring**, accepted by **ICCV 2025**.
 

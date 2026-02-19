@@ -11,8 +11,7 @@ from basicsr.metrics import calculate_psnr, calculate_ssim
 def main():
     model = BDHNet(num_res=20)
     model = model.cuda()
-
-    h5_filename = 'D:/PhDcareer/event_deblur_dataset/GOPRO_shi/test/'
+    h5_filename = './dataset/GOPRO/test/'
     output_path = './output/'
     if not os.path.exists(output_path):
         os.makedirs(output_path)

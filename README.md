@@ -103,7 +103,7 @@ Our BDHNet achieves SOTA performance on **GoPro**, **REBlur**, and **MS-RBD** da
 
 ## 🔬 Ablation Studies
 
-[cite_start]We conduct comprehensive ablation studies to validate the effectiveness of the proposed modules [cite: 320-321].
+[cite_start]We conduct comprehensive ablation studies to validate the effectiveness of the proposed modules.
 
 <details>
 <summary><b>📉 Visualizations: RBAM & Loss Analysis (Click to Expand)</b></summary>
@@ -166,7 +166,7 @@ dataset/
 ### Training
 
 ```bash
-python train.py --train_path /path/to/train --val_path /path/to/val --save_path ./checkpoint/gopro/
+python train.py
 ```
 
 ### Inference

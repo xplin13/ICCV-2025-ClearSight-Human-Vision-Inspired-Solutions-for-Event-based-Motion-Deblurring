@@ -241,7 +241,7 @@ If you have any questions, please feel free to open an issue or contact the auth
 ---
 
 <p align="center">
-  <a href="https://openaccess.thecvf.com/content/ICCV2025/html/Lin_ClearSight_Human_Vision-Inspired_Solutions_for_Event-Based_Motion_Deblurring_ICCV_2025_paper.html/">📄 Paper</a> | 
+  <a href="https://openaccess.thecvf.com/content/ICCV2025/html/Lin_ClearSight_Human_Vision-Inspired_Solutions_for_Event-Based_Motion_Deblurring_ICCV_2025_paper.html">📄 Paper</a> | 
   <a href="https://github.com/xplin13/ICCV-2025-ClearSight-Human-Vision-Inspired-Solutions-for-Event-based-Motion-Deblurring">💻 Code</a> | 
   <a href="https://github.com/xplin13/ICCV-2025-ClearSight-Human-Vision-Inspired-Solutions-for-Event-based-Motion-Deblurring/issues">❓ Issues</a>
 </p>

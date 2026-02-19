@@ -114,7 +114,7 @@ Our BDHNet achieves SOTA performance on **GoPro**, **REBlur**, and **MS-RBD** da
   <img src="Figure/Abla_RBAM.jpg" alt="Ablation RBAM" width="70%">
 </p>
 <p align="center">
-  [cite_start]<b>Figure 7: Effectiveness of the Region of Blurry Attention Module (RBAM).</b> The RBAM generates a mask that specifically targets blurry regions, improving feature fusion accuracy [cite: 345-348].
+  [cite_start]<b>Figure 7: Effectiveness of the Region of Blurry Attention Module (RBAM).</b> The RBAM generates a mask that specifically targets blurry regions, improving feature fusion accuracy.
 </p>
 
 <br>
@@ -124,7 +124,7 @@ Our BDHNet achieves SOTA performance on **GoPro**, **REBlur**, and **MS-RBD** da
   <img src="Figure/Abla_loss_compare.jpg" alt="Ablation Loss" width="60%">
 </p>
 <p align="center">
-  [cite_start]<b>Figure 8: Training loss comparison.</b> The NCM initialization (Green line) leads to faster convergence and lower training loss compared to methods without initialization (Grey line) [cite: 335-339].
+  [cite_start]<b>Figure 8: Training loss comparison.</b> The NCM initialization (Green line) leads to faster convergence and lower training loss compared to methods without initialization (Grey line).
 </p>
 
 </details>
@@ -142,7 +142,7 @@ Our BDHNet achieves SOTA performance on **GoPro**, **REBlur**, and **MS-RBD** da
 ### Installation
 
 ```bash
-git clone [https://github.com/your-username/ClearSight.git](https://github.com/your-username/ClearSight.git)
+git clone [https://github.com/xplin13/ICCV-2025-ClearSight-Human-Vision-Inspired-Solutions-for-Event-based-Motion-Deblurring.git](https://github.com/xplin13/ICCV-2025-ClearSight-Human-Vision-Inspired-Solutions-for-Event-based-Motion-Deblurring.git)
 cd ClearSight
 pip install -r requirements.txt
 ```
@@ -220,10 +220,12 @@ If you find this work helpful for your research, please consider citing our pape
 
 ---
 
-## 🙏 Acknowledgements
+## 👏 Acknowledgements
 
-[To be added]
+We appreciate the open-source code and datasets from the following projects:
 
+* **Code**: [MIMO-UNet](https://github.com/chosj95/MIMO-UNet), [EFNet](https://github.com/AHupuJR/EFNet)
+* **Datasets**: [EIFNet](https://github.com/wyang-vis/EIFNet) (GoPro), [EFNet](https://github.com/AHupuJR/EFNet) (REBlur), [GEM](https://github.com/XiangZ-0/GEM) (MS-RBD).
 ---
 
 ## 📄 License
@@ -240,6 +242,6 @@ If you have any questions, please feel free to open an issue or contact the auth
 
 <p align="center">
   <a href="https://openaccess.thecvf.com/">📄 Paper</a> | 
-  <a href="https://github.com/your-username/ClearSight">💻 Code</a> | 
-  <a href="https://github.com/your-username/ClearSight/issues">❓ Issues</a>
+  <a href="https://github.com/xplin13/ICCV-2025-ClearSight-Human-Vision-Inspired-Solutions-for-Event-based-Motion-Deblurring">💻 Code</a> | 
+  <a href="https://github.com/xplin13/ICCV-2025-ClearSight-Human-Vision-Inspired-Solutions-for-Event-based-Motion-Deblurring/issues">❓ Issues</a>
 </p>

@@ -69,9 +69,32 @@ class FAM(nn.Module):
 
 
 class BDHNet(nn.Module):
-    def __init__(self, num_res= 20, pretrained_path=None):
+    def __init__(self, num_res=20, base_channel=32, event_channels=12, 
+                 num_heads=None, ffn_expansion_factor=4, pretrained_path=None):
+        """
+        Args:
+            num_res: Number of residual blocks in each EBlock/DBlock
+            base_channel: Base channel number for feature extraction (default: 32)
+            event_channels: Number of event channels/bin (default: 12)
+            num_heads: Number of attention heads for RBAM. Can be int or list/tuple of 3 ints for [max, mid, min].
+                       Default: [2, 4, 4] for base_channel=32
+            ffn_expansion_factor: Expansion factor for FFN in RBAM (default: 4)
+            pretrained_path: Path to pretrained weights
+        """
         super(BDHNet, self).__init__()
-        base_channel = 32
+        # Handle num_heads parameter
+        if num_heads is None:
+            num_heads = [2, 4, 4]  # Default heads for [max, mid, min] scales
+        elif isinstance(num_heads, int):
+            num_heads = [num_heads, num_heads, num_heads]
+        elif len(num_heads) != 3:
+            raise ValueError("num_heads must be an int or a list/tuple of 3 integers")
+        
+        # Store configuration for external access
+        self.base_channel = base_channel
+        self.event_channels = event_channels
+        self.num_heads = num_heads
+        self.ffn_expansion_factor = ffn_expansion_factor
         self.Encoder = nn.ModuleList([
             EBlock(base_channel, num_res),
             EBlock(base_channel*2, num_res),
@@ -135,15 +158,15 @@ class BDHNet(nn.Module):
             NCM(base_channel*2, base_channel*4, kernel_size=3, stride=2)
         ])
 
-        self.s2f_max = nn.Conv2d(12, 1, 1, padding=0, stride=1)
-        self.s2f_mid = nn.Conv2d(12, 1, 1, padding=0, stride=1)
-        self.s2f_min = nn.Conv2d(12, 1, 1, padding=0, stride=1)
+        self.s2f_max = nn.Conv2d(event_channels, 1, 1, padding=0, stride=1)
+        self.s2f_mid = nn.Conv2d(event_channels, 1, 1, padding=0, stride=1)
+        self.s2f_min = nn.Conv2d(event_channels, 1, 1, padding=0, stride=1)
 
-        self.event_init = nn.Conv2d(12, 1, 1, padding=0, stride=1)
+        self.event_init = nn.Conv2d(event_channels, 1, 1, padding=0, stride=1)
 
-        self.fusion_max = RBAM(base_channel, num_heads=2, ffn_expansion_factor=4, bias=False, LayerNorm_type='WithBias')
-        self.fusion_mid = RBAM(base_channel*2, num_heads=4, ffn_expansion_factor=4, bias=False, LayerNorm_type='WithBias')
-        self.fusion_min = RBAM(base_channel*4, num_heads=4, ffn_expansion_factor=4, bias=False, LayerNorm_type='WithBias')
+        self.fusion_max = RBAM(base_channel, num_heads=num_heads[0], ffn_expansion_factor=ffn_expansion_factor, bias=False, LayerNorm_type='WithBias')
+        self.fusion_mid = RBAM(base_channel*2, num_heads=num_heads[1], ffn_expansion_factor=ffn_expansion_factor, bias=False, LayerNorm_type='WithBias')
+        self.fusion_min = RBAM(base_channel*4, num_heads=num_heads[2], ffn_expansion_factor=ffn_expansion_factor, bias=False, LayerNorm_type='WithBias')
 
     def load_pretrained(self, pretrained_path):
         full_dict = torch.load(pretrained_path, map_location=torch.device('cuda'))

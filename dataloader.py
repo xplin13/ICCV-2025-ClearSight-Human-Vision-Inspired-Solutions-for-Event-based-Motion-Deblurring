@@ -227,12 +227,13 @@ class DataLoaderVal_npz(Dataset):
         blur_img = blur_img.transpose([2, 0, 1])
 
         event = np.load(self.seqs_info[seq_idx]['event'][frame_idx])
+        num_bins = getattr(self.args, 'num_bins', 12) if hasattr(self, 'args') else 12
         if len(event['t']) == 0:
-            event_div_tensor = np.zeros((12, self.DVS_stream_height, self.DVS_stream_width))
+            event_div_tensor = np.zeros((num_bins, self.DVS_stream_height, self.DVS_stream_width))
         else:
             event_window = np.stack((event['t'], event['x'], event['y'], event['p']), axis=1)
             event_div_tensor = binary_events_to_voxel_grid(event_window,
-                                             num_bins=12,
+                                             num_bins=num_bins,
                                              width=self.DVS_stream_width,
                                              height=self.DVS_stream_height)
 

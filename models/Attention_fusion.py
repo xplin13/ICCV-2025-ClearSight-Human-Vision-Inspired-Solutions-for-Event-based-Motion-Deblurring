@@ -195,6 +195,7 @@ class RBAM(nn.Module):
 
         fused_image = image + mask * self.attn(self.norm1_image(image), self.norm1_event(event))
         fused_event = event + (1-mask) * self.attn(self.norm1_image(event), self.norm1_event(image))
+
         # mlp
         fused = torch.cat([fused_image, fused_event], dim=1)
         fused = to_3d(fused)  # b, h*w, 2c

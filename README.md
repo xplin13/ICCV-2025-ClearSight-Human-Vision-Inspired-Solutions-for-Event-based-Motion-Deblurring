@@ -114,7 +114,7 @@ Our BDHNet achieves SOTA performance on **GoPro**, **REBlur**, and **MS-RBD** da
   <img src="Figure/Abla_RBAM.jpg" alt="Ablation RBAM" width="70%">
 </p>
 <p align="center">
-  [cite_start]<b>Figure 7: Effectiveness of the Region of Blurry Attention Module (RBAM).</b> The RBAM generates a mask that specifically targets blurry regions, improving feature fusion accuracy.
+  <b>Figure 7: Effectiveness of the Region of Blurry Attention Module (RBAM).</b> The RBAM generates a mask that specifically targets blurry regions, improving feature fusion accuracy.
 </p>
 
 <br>
@@ -124,7 +124,7 @@ Our BDHNet achieves SOTA performance on **GoPro**, **REBlur**, and **MS-RBD** da
   <img src="Figure/Abla_loss_compare.jpg" alt="Ablation Loss" width="60%">
 </p>
 <p align="center">
-  [cite_start]<b>Figure 8: Training loss comparison.</b> The NCM initialization (Green line) leads to faster convergence and lower training loss compared to methods without initialization (Grey line).
+  <b>Figure 8: Training loss comparison.</b> The NCM initialization (Green line) leads to faster convergence and lower training loss compared to methods without initialization (Grey line).
 </p>
 
 </details>

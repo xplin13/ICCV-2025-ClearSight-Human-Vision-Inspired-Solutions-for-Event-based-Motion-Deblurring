@@ -173,7 +173,8 @@ class BDHNet(nn.Module):
         pretrained_dict = full_dict['model'] if 'model' in full_dict else full_dict
         self.load_state_dict(pretrained_dict)
 
-    def forward(self, x_blur, event_frame):
+    def _forward_single(self, x_blur, event_frame):
+        """处理单个样本的内部函数，保持原始逻辑不变"""
         ##frame
         x_2 = F.interpolate(x_blur, scale_factor=0.5)
         x_4 = F.interpolate(x_2, scale_factor=0.5)
@@ -263,3 +264,41 @@ class BDHNet(nn.Module):
         outputs.append(z+x_blur)
 
         return outputs, spike_out, mask1
+
+    def forward(self, x_blur, event_frame):
+        """
+        前向传播，支持多 Batch
+        当 batch_size=1 时，直接调用原始逻辑
+        当 batch_size>1 时，逐个样本处理以保持结果一致性
+        """
+        batch_size = x_blur.shape[0]
+        
+        if batch_size == 1:
+            # batch_size=1 时，直接使用原始逻辑
+            return self._forward_single(x_blur, event_frame)
+        else:
+            # batch_size>1 时，逐个样本处理
+            outputs_list = [[] for _ in range(3)]  # 3 个尺度的输出
+            spike_out_list = []
+            mask1_list = []
+            
+            for i in range(batch_size):
+                # 提取单个样本
+                x_blur_i = x_blur[i:i+1]
+                event_frame_i = event_frame[i:i+1]
+                
+                # 处理单个样本
+                outputs_i, spike_out_i, mask1_i = self._forward_single(x_blur_i, event_frame_i)
+                
+                # 收集结果
+                for j, out in enumerate(outputs_i):
+                    outputs_list[j].append(out)
+                spike_out_list.append(spike_out_i)
+                mask1_list.append(mask1_i)
+            
+            # 合并结果
+            outputs = [torch.cat(outputs_list[j], dim=0) for j in range(3)]
+            spike_out = torch.cat(spike_out_list, dim=0)
+            mask1 = torch.cat(mask1_list, dim=0)
+            
+            return outputs, spike_out, mask1

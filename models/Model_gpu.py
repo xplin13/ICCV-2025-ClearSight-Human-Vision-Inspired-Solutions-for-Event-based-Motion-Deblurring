@@ -174,7 +174,6 @@ class BDHNet(nn.Module):
         self.load_state_dict(pretrained_dict)
 
     def _forward_single(self, x_blur, event_frame):
-        """处理单个样本的内部函数，保持原始逻辑不变"""
         ##frame
         x_2 = F.interpolate(x_blur, scale_factor=0.5)
         x_4 = F.interpolate(x_2, scale_factor=0.5)
@@ -266,11 +265,7 @@ class BDHNet(nn.Module):
         return outputs, spike_out, mask1
 
     def forward(self, x_blur, event_frame):
-        """
-        前向传播，支持多 Batch
-        当 batch_size=1 时，直接调用原始逻辑
-        当 batch_size>1 时，逐个样本处理以保持结果一致性
-        """
+
         batch_size = x_blur.shape[0]
         
         if batch_size == 1:
